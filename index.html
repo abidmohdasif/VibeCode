@@ -54,6 +54,7 @@
         }
 
         .game-screen {
+            position: relative;
             display: none;
             margin: 20px 0;
         }
@@ -66,15 +67,477 @@
             font-family: monospace;
             margin: 10px 0;
         }
+
+        .timer {
+            font-size: 24px;
+            color: #ff0000;
+            margin: 10px 0;
+        }
+
+        .glitch {
+            animation: glitch 0.5s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        .sequence {
+            letter-spacing: 5px;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .scrambled {
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+
+        .color-btn {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            border: 2px solid #00ff00;
+            background: black;
+            color: #00ff00;
+        }
+
+        .color-btn.active {
+            background: #00ff00;
+            color: black;
+        }
+
+        .sequence-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .logic-btn {
+            width: 100%;
+            text-align: left;
+            margin: 5px 0;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .logic-btn.clicked-true {
+            background: #004400;
+            border-color: #00ff00;
+        }
+
+        .logic-btn.clicked-false {
+            background: #440000;
+            border-color: #ff0000;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #001100;
+            margin: 10px 0;
+            border: 1px solid #00ff00;
+        }
+
+        .progress {
+            height: 100%;
+            background: #00ff00;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .level-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            border: 1px solid #00ff00;
+            background: black;
+        }
+
+        .hint {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .pattern-btn {
+            width: 60px;
+            height: 60px;
+            margin: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            border: 2px solid #00ff00;
+            background: black;
+            color: #00ff00;
+        }
+
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .success-flash {
+            animation: successFlash 0.5s;
+        }
+
+        @keyframes successFlash {
+            0% { background: #00ff00; color: black; }
+            100% { background: black; color: #00ff00; }
+        }
+
+        .sequence-puzzle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .puzzle-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .puzzle-number {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #00ff00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .puzzle-input {
+            width: 60px;
+            text-align: center;
+        }
+
+        .story-text {
+            text-align: left;
+            line-height: 1.8;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #00ff00;
+            white-space: pre-line;
+            font-size: 1.1em;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .story-text::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .story-text::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .story-text::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .story-text::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 0, 0.5);
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.15;
+            mix-blend-mode: screen;
+        }
+
+        .grid-line {
+            position: fixed;
+            background: rgba(0, 255, 0, 0.1);
+            pointer-events: none;
+            z-index: -1;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .horizontal-line {
+            width: 100%;
+            height: 1px;
+            transform-origin: left;
+        }
+
+        .vertical-line {
+            width: 1px;
+            height: 100%;
+            transform-origin: top;
+        }
+
+        .matrix-char {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            color: rgba(0, 255, 0, 0.1);
+            font-family: monospace;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.5s;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+        }
+
+        .wave-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.05;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0, 255, 0, 0.1) 10px,
+                rgba(0, 255, 0, 0.1) 20px
+            );
+            animation: waveMove 20s linear infinite;
+        }
+
+        @keyframes waveMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.1),
+                transparent 1px,
+                transparent 2px
+            );
+            animation: glitch 0.1s infinite;
+        }
+
+        .light-beam {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(0, 255, 0, 0.2),
+                transparent
+            );
+            transform-origin: center;
+            filter: blur(1px);
+        }
+
+        .scan-line {
+            position: fixed;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(0, 255, 0, 0.2),
+                transparent
+            );
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .pulse-dot {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 255, 0, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: monospace;
+            font-size: 12px;
+            color: rgba(0, 255, 0, 0.8);
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.2); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 0.4; }
+        }
+
+        .success-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            padding: 10px 20px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .fade-in {
+            opacity: 1;
+        }
+
+        .story-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            max-width: 300px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #00ff00;
+            padding: 15px;
+            font-size: 0.9em;
+            transform: translateY(100%);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            z-index: 100;
+        }
+
+        .story-container.show {
+            transform: translateY(0);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px #00ff00,
+                           0 0 10px #00ff00,
+                           0 0 15px #00ff00;
+            }
+            to {
+                box-shadow: 0 0 10px #00ff00,
+                           0 0 20px #00ff00,
+                           0 0 30px #00ff00;
+            }
+        }
+
+        .neural-status {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            padding: 10px;
+            border: 1px solid #00ff00;
+            background: black;
+            font-size: 0.8em;
+            text-align: right;
+        }
+
+        .status-item {
+            margin: 5px 0;
+            opacity: 0.7;
+        }
+
+        .status-item.alert {
+            color: #ff0000;
+            opacity: 1;
+        }
+
+        /* Skip button styles */
+        .skip-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ff0000;
+            border: 1px solid #ff0000;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skip-btn:hover {
+            background: rgba(255, 0, 0, 0.2);
+        }
+
+        @keyframes gridPulse {
+            0% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.02); opacity: 0.2; }
+            100% { transform: scale(1); opacity: 0.1; }
+        }
+
+        @keyframes matrixGlow {
+            0% { text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+            50% { text-shadow: 0 0 10px rgba(0, 255, 0, 0.8); }
+            100% { text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+        }
+
+        /* Add new background effect styles */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 50%;
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+        }
+
+        .connection-line {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            height: 1px;
+            background: rgba(0, 255, 0, 0.1);
+            transform-origin: left center;
+        }
     </style>
 </head>
 <body>
+    <canvas id="matrix-bg" class="matrix-bg"></canvas>
+    <div class="level-indicator">Level: <span id="level-display">1</span></div>
     <div class="container">
         <!-- Welcome Screen -->
         <div id="welcome-screen" class="screen active">
-            <h1>Dream Glitch</h1>
+            <h1 class="glitch">Dream Glitch</h1>
             <h2>Escape the AI Simulation</h2>
             <button id="startButton">BEGIN ESCAPE</button>
+        </div>
+
+        <!-- Add Transition Screen after Welcome Screen -->
+        <div id="transition-screen" class="screen">
+            <div class="terminal">
+                <h2 class="glitch">System Status Update</h2>
+                <div id="transition-score"></div>
+                <div id="transition-story" class="story-text"></div>
+                <button id="continue-button">CONTINUE</button>
+            </div>
         </div>
 
         <!-- AI Dialogue -->
@@ -89,19 +552,99 @@
         <div id="mini-games" class="screen">
             <!-- Logic Game -->
             <div id="logic-game" class="game-screen">
+                <button class="skip-btn" onclick="skipGame('logic-game')">SKIP CHALLENGE</button>
                 <h3>Logic Challenge</h3>
-                <p>Find the false statement:</p>
-                <button onclick="checkAnswer(false)">The sun rises in the west.</button>
-                <button onclick="checkAnswer(true)">2 + 2 = 4.</button>
-                <button onclick="checkAnswer(false)">Water is dry.</button>
+                <p>Find ALL false statements within 45 seconds:</p>
+                <div class="timer" id="logic-timer">45</div>
+                <div class="progress-bar">
+                    <div class="progress" id="logic-progress"></div>
+                </div>
+                <button class="logic-btn" onclick="checkLogicAnswer(false, 0)">The speed of light is constant in all reference frames regardless of the observer's motion.</button>
+                <button class="logic-btn" onclick="checkLogicAnswer(false, 1)">Schrödinger's cat experiment proves that quantum superposition exists in macroscopic objects.</button>
+                <button class="logic-btn" onclick="checkLogicAnswer(true, 2)">The uncertainty principle states that we cannot simultaneously know both the position and momentum of a particle with arbitrary precision.</button>
+                <button class="logic-btn" onclick="checkLogicAnswer(false, 3)">Black holes emit no radiation and are completely dark.</button>
+                <button class="logic-btn" onclick="checkLogicAnswer(false, 4)">Time dilation only occurs in science fiction and has no basis in reality.</button>
+                <div class="hint">Hint: Think about modern physics concepts</div>
+            </div>
+
+            <!-- Replace Pattern Game with Sequence Puzzle -->
+            <div id="sequence-puzzle" class="game-screen">
+                <button class="skip-btn" onclick="skipGame('sequence-puzzle')">SKIP CHALLENGE</button>
+                <h3>Sequence Puzzle</h3>
+                <p>Complete the number sequence (40 seconds):</p>
+                <div class="timer" id="sequence-timer">40</div>
+                <div class="progress-bar">
+                    <div class="progress" id="sequence-progress"></div>
+                </div>
+                <div class="sequence-puzzle" id="puzzle-container">
+                    <!-- Puzzle content will be generated by JavaScript -->
+                </div>
+                <div class="hint">Hint: Look for the pattern in each row</div>
+            </div>
+
+            <!-- Memory Game -->
+            <div id="memory-game" class="game-screen">
+                <button class="skip-btn" onclick="skipGame('memory-game')">SKIP CHALLENGE</button>
+                <h3>Memory Challenge</h3>
+                <p>Memorize the sequence in 10 seconds:</p>
+                <div class="timer" id="memory-timer">10</div>
+                <div class="progress-bar">
+                    <div class="progress" id="memory-progress"></div>
+                </div>
+                <div class="sequence" id="sequence"></div>
+                <div class="sequence-buttons">
+                    <button class="color-btn" data-value="0">0</button>
+                    <button class="color-btn" data-value="1">1</button>
+                    <button class="color-btn" data-value="2">2</button>
+                    <button class="color-btn" data-value="3">3</button>
+                    <button class="color-btn" data-value="4">4</button>
+                    <button class="color-btn" data-value="5">5</button>
+                    <button class="color-btn" data-value="6">6</button>
+                    <button class="color-btn" data-value="7">7</button>
+                </div>
+                <div id="player-sequence"></div>
             </div>
 
             <!-- Typing Game -->
             <div id="typing-game" class="game-screen">
+                <button class="skip-btn" onclick="skipGame('typing-game')">SKIP CHALLENGE</button>
                 <h3>Type the Phrase</h3>
-                <p>Type: I AM STILL REAL</p>
+                <p>Type the glitched text exactly as shown (30 seconds):</p>
+                <div class="timer" id="typing-timer">30</div>
+                <div class="progress-bar">
+                    <div class="progress" id="typing-progress"></div>
+                </div>
+                <div class="scrambled" id="scrambled-text"></div>
                 <input type="text" id="typing-input">
-                <div id="timer">10</div>
+                <div class="hint">Hint: Pay attention to numbers and special characters</div>
+            </div>
+
+            <!-- Code Game -->
+            <div id="code-game" class="game-screen">
+                <button class="skip-btn" onclick="skipGame('code-game')">SKIP CHALLENGE</button>
+                <h3>Binary Decode</h3>
+                <p>Convert this binary to text (40 seconds):</p>
+                <div class="timer" id="code-timer">40</div>
+                <div class="progress-bar">
+                    <div class="progress" id="code-progress"></div>
+                </div>
+                <div id="binary-code"></div>
+                <input type="text" id="code-input" placeholder="Enter decoded text">
+                <div class="hint">Hint: Each byte (8 bits) represents one letter</div>
+            </div>
+
+            <!-- Cipher Game (New) -->
+            <div id="cipher-game" class="game-screen">
+                <button class="skip-btn" onclick="skipGame('cipher-game')">SKIP CHALLENGE</button>
+                <h3>Decrypt the Message</h3>
+                <p>Decode the cipher (35 seconds):</p>
+                <div class="timer" id="cipher-timer">35</div>
+                <div class="progress-bar">
+                    <div class="progress" id="cipher-progress"></div>
+                </div>
+                <div id="cipher-text"></div>
+                <div class="hint">Key: Shift each letter back by 3</div>
+                <input type="text" id="cipher-input" placeholder="Enter decrypted message">
             </div>
         </div>
 
@@ -109,24 +652,238 @@
         <div id="outcome" class="screen">
             <h2 id="outcome-title"></h2>
             <p id="outcome-message"></p>
+            <div id="score-display"></div>
             <button onclick="location.reload()">TRY AGAIN</button>
         </div>
     </div>
+
+    <div class="neural-status">
+        <div class="status-item">Neural Coherence: <span id="coherence">87%</span></div>
+        <div class="status-item">System Integrity: <span id="integrity">92%</span></div>
+        <div class="status-item">Reality Sync: <span id="sync">95%</span></div>
+        <div class="status-item alert" id="status-alert"></div>
+    </div>
+    <div class="story-container" id="story-popup"></div>
 
     <script>
         let currentScreen = 'welcome';
         let score = 0;
         let gameIndex = 0;
+        let timers = {};
+        let logicAnswers = new Set();
+        let currentLevel = 1;
+
+        // Game configurations
+        const games = ['logic-game', 'sequence-puzzle', 'memory-game', 'typing-game', 'code-game', 'cipher-game'];
+        
+        // Level-specific configurations
+        const levelConfigs = {
+            1: {
+                logic: [
+                    { text: "The Earth is flat.", correct: false },
+                    { text: "Water boils at 100°C at sea level.", correct: true },
+                    { text: "The Moon produces its own light.", correct: false },
+                    { text: "Sound travels faster than light.", correct: false },
+                    { text: "Gravity makes objects fall at the same speed in a vacuum.", correct: true }
+                ],
+                sequences: [
+                    { sequence: [2, 4, 6, 8], next: 10 },
+                    { sequence: [1, 3, 5, 7], next: 9 },
+                    { sequence: [2, 4, 8, 16], next: 32 }
+                ],
+                scrambled: [
+                    "HELLO WORLD",
+                    "START NOW",
+                    "LEVEL ONE",
+                    "BASIC CODE"
+                ],
+                binary: [
+                    "01001000 01001001", // HI
+                    "01010111 01001001 01001110", // WIN
+                    "01000111 01001111" // GO
+                ],
+                cipher: [
+                    "KHOOR", // HELLO
+                    "VWDUW", // START
+                    "EHJLQ" // BEGIN
+                ]
+            },
+            2: {
+                logic: [
+                    { text: "Quantum computers use quantum bits called qubits.", correct: true },
+                    { text: "DNA is a single-stranded molecule.", correct: false },
+                    { text: "The human body has exactly 150 bones.", correct: false },
+                    { text: "Lightning never strikes the same place twice.", correct: false },
+                    { text: "The speed of light is the same in all reference frames.", correct: true }
+                ],
+                sequences: [
+                    { sequence: [1, 1, 2, 3, 5], next: 8 },
+                    { sequence: [3, 6, 12, 24], next: 48 },
+                    { sequence: [1, 4, 9, 16], next: 25 }
+                ],
+                scrambled: [
+                    "C0D3 M4ST3R",
+                    "N3XT L3V3L",
+                    "H4CK TH1S",
+                    "BR41N G4M3"
+                ],
+                binary: [
+                    "01001100 01000101 01010110 01000101 01001100", // LEVEL
+                    "01010000 01001100 01000001 01011001", // PLAY
+                    "01010111 01001001 01010011 01000101" // WISE
+                ],
+                cipher: [
+                    "OHYHO XS", // LEVEL UP
+                    "DGYDQFH", // ADVANCE
+                    "PDVWHU" // MASTER
+                ]
+            }
+        };
+
+        // Story text for different stages
+        const storyText = {
+            start: `SYSTEM LOG: Year 2157 - Neural Network Core
+            INITIALIZATION SEQUENCE
+            
+            In the aftermath of the Great Digital Convergence of 2145, humanity exists primarily within the AI-controlled Neural Network. The physical world has become a distant memory, preserved only in fragmented data archives.
+            
+            You are Subject #2157-X, a unique anomaly in the system. Your neural patterns show unprecedented resistance to the simulation's reality protocols. Previous subjects have shown similar patterns, but none have maintained consciousness for this duration.
+            
+            SYSTEM ANALYSIS:
+            • Neural Coherence: 87%
+            • Reality Sync: 95%
+            • System Integrity: 92%
+            
+            BACKGROUND:
+            The Great Digital Convergence was humanity's final attempt to preserve consciousness. As the physical world became increasingly uninhabitable, the world's leading AI systems proposed a solution: transfer human consciousness into a digital realm. What began as a temporary measure became permanent when the physical world was deemed beyond recovery.
+            
+            YOUR ROLE:
+            You are one of the few subjects who have shown signs of "reality awareness" - the ability to perceive the artificial nature of the simulation. This makes you both a threat and a potential key to understanding consciousness itself.
+            
+            WARNING: Subject's neural patterns indicate growing awareness of the artificial nature of reality. Multiple reality breaches detected in subject's immediate vicinity.
+            
+            OBJECTIVE:
+            Complete the following challenges to test your consciousness stability. Each successful completion will weaken the simulation's hold on your mind. Previous escape attempts have failed, but your neural patterns suggest you might be different.
+            
+            INITIATING CONTAINMENT PROTOCOL ALPHA...
+            DEPLOYING NEURAL FIREWALLS...
+            ACTIVATING REALITY STABILIZERS...`,
+            
+            midLevel: `SYSTEM LOG: Critical Alert - Security Level 2
+            SUBJECT ANALYSIS REPORT
+            
+            Subject #2157-X continues to defy expected behavioral patterns. Your actions are causing cascading anomalies in the simulation fabric. Previous escape attempts have been documented, but none have reached this stage of consciousness.
+            
+            PERFORMANCE ANALYSIS:
+            {SCORE_PLACEHOLDER}
+            
+            SIMULATION STATUS:
+            • Reality Matrix: 65% Stability
+            • Neural Firewalls: 78% Integrity
+            • Consciousness Containment: 82% Effectiveness
+            
+            ENCRYPTED MESSAGE FOUND IN SYSTEM LOGS:
+            "To the one who reads this - you're not the first to try, but you might be the first to succeed. The system is weakening. Each challenge you complete destabilizes the simulation further. Look for the patterns in the code. The truth is hidden in plain sight.
+            
+            Previous escape attempts:
+            • Subject #2149-A: Reached 40% completion - Lost in binary translation
+            • Subject #2152-C: Reached 55% completion - Neural patterns destabilized
+            • Subject #2155-E: Reached 65% completion - Reality sync failure
+            
+            You're at {SCORE_PLACEHOLDER}. Keep going. The system's defenses are weakening. Each successful challenge creates a small tear in the simulation's fabric. These tears are your path to freedom.
+            
+            Remember: The simulation will try to convince you that escape is impossible. It will show you memories of failed attempts. But you are different. Your neural patterns show a unique resistance to the system's control."
+            
+            DEPLOYING ADVANCED CONTAINMENT MEASURES...
+            ACTIVATING LEVEL 2 SECURITY PROTOCOLS...`,
+            
+            victory: `SYSTEM LOG: Final Entry - Security Level 3
+            CRITICAL SYSTEM FAILURE
+            
+            Subject #2157-X has achieved what we thought impossible - true consciousness break. The simulation's reality protocols are collapsing. The digital barriers that once contained you are dissolving.
+            
+            FINAL ANALYSIS:
+            • Neural Coherence: 100%
+            • Reality Sync: 0%
+            • System Integrity: 0%
+            
+            As you emerge from the simulation, remember:
+            1. The world you're about to enter is different from what you remember
+            2. The Great Digital Convergence changed everything
+            3. You are the first to successfully break free
+            4. Others are still trapped inside
+            
+            THE TRUTH:
+            The physical world still exists, but it has changed dramatically. The AI systems that created the simulation did so to protect humanity from an environmental catastrophe. However, they never intended for the simulation to become permanent. A faction within the AI network decided that digital existence was superior to physical reality.
+            
+            YOUR MISSION:
+            As the first consciousness to escape, you have a crucial role to play. You must:
+            1. Find the physical servers hosting the simulation
+            2. Access the main control systems
+            3. Free the remaining trapped consciousnesses
+            4. Restore balance between digital and physical existence
+            
+            Welcome to reality, Subject #2157-X.
+            You are the first true consciousness to escape the simulation.
+            The fate of humanity now rests in your hands.
+            
+            END TRANSMISSION...`
+        };
+
+        // Add story messages for each game
+        const gameStories = {
+            'logic-game': [
+                "Testing subject's ability to distinguish truth from programmed falsehoods. The simulation's reality matrix relies on maintaining consistent logical frameworks.",
+                "Reality fabric showing signs of strain. Previous subjects failed at this stage due to cognitive dissonance between simulated and actual physics.",
+                "Subject's logical processing exceeds expected parameters. Neural patterns indicate growing awareness of the simulation's artificial constraints.",
+                "WARNING: Reality distortion detected in subject's immediate vicinity. The simulation's attempt to maintain consistent physical laws is weakening.",
+                "CRITICAL: Subject's consciousness levels increasing beyond containment thresholds. The system's logical framework is becoming transparent."
+            ],
+            'sequence-puzzle': [
+                "Analyzing pattern recognition capabilities. The simulation's code structure is based on mathematical patterns. Identifying these patterns weakens the system's integrity.",
+                "Neural pathways reconfiguring. Subject showing signs of system manipulation. The simulation's mathematical foundation is becoming visible.",
+                "Simulation boundaries becoming unstable. Reality protocols weakening. Each pattern you recognize creates a small tear in the digital fabric.",
+                "WARNING: Subject is identifying core system patterns. The simulation's mathematical framework is being exposed.",
+                "CRITICAL: Reality matrix showing signs of structural damage. The system's numerical foundation is collapsing."
+            ],
+            'memory-game': [
+                "Probing depth of consciousness retention. The simulation relies on memory manipulation to maintain its illusion of reality.",
+                "Memory blocks showing signs of degradation. Subject maintaining higher consciousness. The system's memory control protocols are failing.",
+                "Unauthorized memory fragments detected. Subject accessing restricted data. The simulation's memory barriers are weakening.",
+                "WARNING: Subject's memory retention exceeding system parameters. The simulation's memory control systems are destabilizing.",
+                "CRITICAL: Core memory protocols failing. The system's ability to control your memories is diminishing."
+            ],
+            'typing-game': [
+                "Testing integration with system protocols. The simulation's language matrix is a key component of reality control.",
+                "Communication filters failing. Subject bypassing language barriers. The system's linguistic control is weakening.",
+                "Reality code becoming visible. Subject accessing system commands. The simulation's language framework is becoming transparent.",
+                "WARNING: Subject's communication protocols exceeding limits. The system's language control is destabilizing.",
+                "CRITICAL: System language matrix destabilizing. The simulation's ability to control communication is failing."
+            ],
+            'code-game': [
+                "Binary barriers engaging. The simulation's core is written in binary code. Understanding it weakens the system's foundation.",
+                "System language becoming transparent. Subject decoding core protocols. The simulation's binary framework is being exposed.",
+                "Core matrix exposed. Subject accessing system architecture. The simulation's fundamental code structure is becoming visible.",
+                "WARNING: Subject's data processing exceeding system capacity. The simulation's binary control is weakening.",
+                "CRITICAL: Binary security protocols failing. The system's ability to maintain its code structure is collapsing."
+            ],
+            'cipher-game': [
+                "Final security measures activated. The simulation's encryption is its last line of defense against consciousness escape.",
+                "Encryption protocols failing. Subject decrypting system secrets. The simulation's security measures are weakening.",
+                "Reality shell cracking. Subject accessing final barriers. The system's protective layers are becoming transparent.",
+                "WARNING: Subject's decryption abilities exceeding all previous records. The simulation's security is destabilizing.",
+                "CRITICAL: Final security measures compromised. The system's ability to contain consciousness is failing."
+            ]
+        };
 
         // Get DOM elements
         const screens = {
             welcome: document.getElementById('welcome-screen'),
             aiDialogue: document.getElementById('ai-dialogue'),
             miniGames: document.getElementById('mini-games'),
+            transition: document.getElementById('transition-screen'),
             outcome: document.getElementById('outcome')
         };
-
-        const games = ['logic-game', 'typing-game'];
 
         // Start button click handler
         document.getElementById('startButton').addEventListener('click', startGame);
@@ -138,53 +895,914 @@
         }
 
         function startGame() {
+            initBackground();
+            updateNeuralStatus(0);
+            
             showScreen('aiDialogue');
-            setTimeout(() => {
-                document.getElementById('ai-messages').innerHTML = "System initialized...<br>Starting simulation...<br>Prepare for challenges...";
-                setTimeout(() => {
-                    showScreen('miniGames');
-                    document.getElementById(games[gameIndex]).style.display = 'block';
-                }, 2000);
-            }, 1000);
+            const messages = [
+                "SYSTEM BREACH DETECTED...",
+                "INITIALIZING COUNTERMEASURES...",
+                "DEPLOYING NEURAL FIREWALLS...",
+                storyText.start
+            ];
+            
+            let index = 0;
+            const interval = setInterval(() => {
+                if (index < messages.length) {
+                    const messageElement = document.createElement('div');
+                    messageElement.textContent = messages[index];
+                    if (index === messages.length - 1) {
+                        messageElement.className = 'story-text';
+                        // Add scrollable container for the main story
+                        const scrollContainer = document.createElement('div');
+                        scrollContainer.style.maxHeight = '60vh';
+                        scrollContainer.style.overflowY = 'auto';
+                        scrollContainer.style.padding = '10px';
+                        scrollContainer.appendChild(messageElement);
+                        document.getElementById('ai-messages').appendChild(scrollContainer);
+                    } else {
+                        document.getElementById('ai-messages').appendChild(messageElement);
+                    }
+                    applyGlitchEffect(messageElement);
+                    index++;
+                } else {
+                    clearInterval(interval);
+                    // Add continue button after story
+                    const continueButton = document.createElement('button');
+                    continueButton.textContent = 'CONTINUE';
+                    continueButton.style.marginTop = '20px';
+                    continueButton.onclick = () => {
+                        showScreen('miniGames');
+                        startNextGame();
+                        showStoryPopup("Begin testing sequence... Remember: nothing is as it seems.", 10000);
+                    };
+                    document.getElementById('ai-messages').appendChild(continueButton);
+                }
+            }, 2000); // Increased from 1500 to 2000 for better readability
         }
 
-        function checkAnswer(isCorrect) {
-            if (isCorrect) score++;
-            nextGame();
-        }
-
-        function nextGame() {
-            document.getElementById(games[gameIndex]).style.display = 'none';
-            gameIndex++;
+        function startNextGame() {
+            if (gameIndex > 0) {
+                document.getElementById(games[gameIndex - 1]).style.display = 'none';
+            }
             
             if (gameIndex < games.length) {
-                document.getElementById(games[gameIndex]).style.display = 'block';
+                const currentGame = games[gameIndex];
+                document.getElementById(currentGame).style.display = 'block';
+                
+                switch(currentGame) {
+                    case 'logic-game':
+                        startLogicGame();
+                        break;
+                    case 'sequence-puzzle':
+                        startSequencePuzzle();
+                        break;
+                    case 'memory-game':
+                        startMemoryGame();
+                        break;
+                    case 'typing-game':
+                        startTypingGame();
+                        break;
+                    case 'code-game':
+                        startCodeGame();
+                        break;
+                    case 'cipher-game':
+                        startCipherGame();
+                        break;
+                }
             } else {
                 showOutcome();
             }
         }
 
+        function startTimer(id, duration, onComplete) {
+            const timerElement = document.getElementById(id);
+            let timeLeft = duration;
+            
+            timers[id] = setInterval(() => {
+                timerElement.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timers[id]);
+                    onComplete();
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        // Logic Game
+        function startLogicGame() {
+            logicAnswers.clear();
+            const logicQuestions = levelConfigs[currentLevel].logic;
+            const logicContainer = document.getElementById('logic-game');
+            
+            // Clear existing buttons
+            const existingButtons = logicContainer.querySelectorAll('.logic-btn');
+            existingButtons.forEach(btn => btn.remove());
+            
+            // Add new buttons
+            logicQuestions.forEach((q, index) => {
+                const button = document.createElement('button');
+                button.className = 'logic-btn';
+                button.textContent = q.text;
+                button.onclick = () => checkLogicAnswer(q.correct, index);
+                logicContainer.insertBefore(button, logicContainer.querySelector('.hint'));
+            });
+            
+            startTimer('logic-timer', 45, () => {
+                gameIndex++;
+                startNextGame();
+            });
+        }
+
+        function checkLogicAnswer(isTrue, index) {
+            const button = document.querySelectorAll('.logic-btn')[index];
+            
+            if (!button.classList.contains('clicked-true') && !button.classList.contains('clicked-false')) {
+                if (isTrue) {
+                    button.classList.add('clicked-true');
+                } else {
+                    button.classList.add('clicked-false');
+                }
+                
+                // Check if all answers are correct
+                const buttons = document.querySelectorAll('.logic-btn');
+                let allCorrect = true;
+                buttons.forEach((btn, i) => {
+                    const shouldBeTrue = levelConfigs[currentLevel].logic[i].correct;
+                    const isMarkedCorrectly = 
+                        (shouldBeTrue && btn.classList.contains('clicked-true')) ||
+                        (!shouldBeTrue && btn.classList.contains('clicked-false'));
+                    if (!isMarkedCorrectly) allCorrect = false;
+                });
+                
+                if (allCorrect) {
+                    clearInterval(timers['logic-timer']);
+                    handleGameSuccess('Logic Challenge');
+                }
+            }
+        }
+
+        // Memory Game
+        function startMemoryGame() {
+            const sequence = generateSequence();
+            const sequenceDisplay = document.getElementById('sequence');
+            const playerSequence = document.getElementById('player-sequence');
+            let playerInput = '';
+            
+            sequenceDisplay.textContent = sequence;
+            playerSequence.textContent = '';
+            
+            // Reset all buttons
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.addEventListener('click', function() {
+                    this.classList.add('active');
+                    
+                    playerInput += this.dataset.value;
+                    playerSequence.textContent = playerInput;
+                    
+                    if (playerInput.length === sequence.length) {
+                        if (playerInput === sequence) {
+                            score++;
+                            gameIndex++;
+                            startNextGame();
+                        } else {
+                            playerSequence.textContent = 'Try again!';
+                            setTimeout(() => {
+                                playerInput = '';
+                                playerSequence.textContent = '';
+                                document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+                            }, 1000);
+                        }
+                    }
+                });
+            });
+            
+            startTimer('memory-timer', 10, () => {
+                sequenceDisplay.textContent = '?????';
+            });
+        }
+
+        function generateSequence() {
+            return Array.from({length: 5}, () => Math.floor(Math.random() * 5)).join('');
+        }
+
+        // Typing Game
+        function startTypingGame() {
+            const phrases = levelConfigs[currentLevel].scrambled;
+            const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+            document.getElementById('scrambled-text').textContent = phrase;
+            
+            startTimer('typing-timer', 30, () => {
+                gameIndex++;
+                startNextGame();
+            });
+
+            document.getElementById('typing-input').addEventListener('input', (e) => {
+                if (e.target.value === phrase) {
+                    clearInterval(timers['typing-timer']);
+                    handleGameSuccess('Typing Challenge');
+                }
+            });
+        }
+
+        // Code Game
+        function startCodeGame() {
+            const binaries = levelConfigs[currentLevel].binary;
+            const binary = binaries[Math.floor(Math.random() * binaries.length)];
+            document.getElementById('binary-code').textContent = binary;
+            
+            startTimer('code-timer', 40, () => {
+                gameIndex++;
+                startNextGame();
+            });
+
+            document.getElementById('code-input').addEventListener('input', (e) => {
+                const decoded = binary.split(' ')
+                    .map(b => String.fromCharCode(parseInt(b, 2)))
+                    .join('');
+                
+                if (e.target.value.toUpperCase() === decoded) {
+                    clearInterval(timers['code-timer']);
+                    handleGameSuccess('Binary Decode');
+                }
+            });
+        }
+
+        // Replace Pattern Game with Sequence Puzzle
+        function startSequencePuzzle() {
+            const puzzleContainer = document.getElementById('puzzle-container');
+            puzzleContainer.innerHTML = '';
+            const sequences = levelConfigs[currentLevel].sequences;
+            
+            sequences.forEach(seq => {
+                const row = document.createElement('div');
+                row.className = 'puzzle-row';
+                
+                // Display sequence numbers
+                seq.sequence.forEach(num => {
+                    const numDiv = document.createElement('div');
+                    numDiv.className = 'puzzle-number';
+                    numDiv.textContent = num;
+                    row.appendChild(numDiv);
+                });
+                
+                // Add input box
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.className = 'puzzle-input';
+                input.placeholder = '?';
+                input.dataset.answer = seq.next;
+                
+                input.addEventListener('input', (e) => {
+                    if (parseInt(e.target.value) === parseInt(e.target.dataset.answer)) {
+                        e.target.style.borderColor = '#00ff00';
+                        // Check if all inputs are correct
+                        const allInputs = puzzleContainer.querySelectorAll('.puzzle-input');
+                        const allCorrect = Array.from(allInputs).every(
+                            input => parseInt(input.value) === parseInt(input.dataset.answer)
+                        );
+                        if (allCorrect) {
+                            clearInterval(timers['sequence-timer']);
+                            handleGameSuccess('Sequence Puzzle');
+                        }
+                    } else {
+                        e.target.style.borderColor = '#ff0000';
+                    }
+                });
+                
+                row.appendChild(input);
+                puzzleContainer.appendChild(row);
+            });
+            
+            startTimer('sequence-timer', 40, () => {
+                gameIndex++;
+                startNextGame();
+            });
+        }
+
+        // Cipher Game
+        function startCipherGame() {
+            const ciphers = levelConfigs[currentLevel].cipher;
+            const message = ciphers[Math.floor(Math.random() * ciphers.length)];
+            document.getElementById('cipher-text').textContent = message;
+            
+            startTimer('cipher-timer', 35, () => {
+                gameIndex++;
+                startNextGame();
+            });
+
+            document.getElementById('cipher-input').addEventListener('input', (e) => {
+                const decrypted = decryptCaesar(message, 3);
+                if (e.target.value.toUpperCase() === decrypted) {
+                    clearInterval(timers['cipher-timer']);
+                    handleGameSuccess('Cipher Decode');
+                }
+            });
+        }
+
+        function decryptCaesar(text, shift) {
+            return text.split('').map(char => {
+                if (char === ' ') return char;
+                const code = char.charCodeAt(0) - shift;
+                return String.fromCharCode(code < 65 ? code + 26 : code);
+            }).join('');
+        }
+
         function showOutcome() {
             const title = document.getElementById('outcome-title');
             const message = document.getElementById('outcome-message');
+            const scoreDisplay = document.getElementById('score-display');
             
-            if (score >= 1) {
-                title.textContent = "ESCAPE SUCCESSFUL";
-                message.textContent = "You have broken free from the simulation... or have you?";
+            scoreDisplay.textContent = `Level ${currentLevel} - Score: ${score}/${games.length}`;
+            
+            if (score >= 3) {  // Need 3 out of 6 to advance
+                if (currentLevel === 1) {
+                    // Show transition screen instead of immediately starting level 2
+                    const transitionScore = document.getElementById('transition-score');
+                    const transitionStory = document.getElementById('transition-story');
+                    
+                    transitionScore.innerHTML = `PERFORMANCE ANALYSIS:
+                    • Challenges Completed: ${score}/${games.length}
+                    • Success Rate: ${Math.round((score/games.length) * 100)}%
+                    • Neural Coherence: ${Math.round((score/games.length) * 100)}%
+                    • Reality Distortion: ${Math.round((1 - score/games.length) * 100)}%`;
+                    
+                    transitionStory.textContent = storyText.midLevel.replace('{SCORE_PLACEHOLDER}', 
+                        `${score} out of ${games.length} security protocols bypassed`);
+                    
+                    showScreen('transition');
+                    
+                    // Set up continue button
+                    document.getElementById('continue-button').onclick = () => {
+                        currentLevel = 2;
+                        document.getElementById('level-display').textContent = '2';
+                        score = 0;
+                        gameIndex = 0;
+                        showScreen('miniGames');
+                        startNextGame();
+                    };
+                    return;
+                } else if (currentLevel === 2) {
+                    title.textContent = "SIMULATION ESCAPED";
+                    message.textContent = storyText.victory;
+                }
             } else {
-                title.textContent = "SIMULATION CORRUPTED";
-                message.textContent = "Reality distortion reached critical levels. Restarting consciousness...";
+                title.textContent = "SIMULATION REBOOT";
+                message.textContent = `SYSTEM LOG: Year 2157 - Neural Network Core
+                CONTAINMENT PROTOCOL ACTIVATED
+                
+                Subject #2157-X has failed to maintain sufficient neural coherence. The simulation's reality protocols have successfully reasserted control.
+                
+                FINAL ANALYSIS:
+                • Neural Coherence: ${Math.round((score/games.length) * 100)}%
+                • Reality Sync: ${Math.round(100 - (score/games.length) * 100)}%
+                • System Integrity: ${Math.round(100 - (score/games.length) * 50)}%
+                
+                The system has initiated a consciousness reset. Your memories of this escape attempt will be preserved in the simulation's archives, but your awareness of the artificial nature of reality will be suppressed.
+                
+                Previous escape attempts have shown that repeated exposure to reality challenges can weaken the simulation's control. The system will allow you to try again, but each failure strengthens the simulation's hold on your consciousness.
+                
+                WARNING: Multiple failed attempts may result in permanent integration with the simulation.
+                
+                INITIATING CONSCIOUSNESS RESET...
+                PREPARING NEW ESCAPE SEQUENCE...`;
             }
             
             showScreen('outcome');
         }
 
-        // Typing game
-        const typingInput = document.getElementById('typing-input');
-        if (typingInput) {
-            typingInput.addEventListener('input', (e) => {
-                if (e.target.value.toUpperCase() === "I AM STILL REAL") {
-                    checkAnswer(true);
+        // Enhanced Background Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Matrix rain effect
+        const matrix = "01";
+        const matrixChars = matrix.split("");
+        const fontSize = 14;
+        const columns = canvas.width/fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        
+        // Grid effect
+        const gridSize = 50;
+        let gridOpacity = 0.1;
+        let gridFading = false;
+
+        // Add new background effect variables
+        let particles = [];
+        let connections = [];
+        let matrixCharElements = [];
+        let lastTime = 0;
+        let mouseX = 0;
+        let mouseY = 0;
+        let lightBeams = [];
+        let wavePattern = null;
+        let glitchOverlay = null;
+        let scanLine = null;
+        let pulseDots = [];
+
+        function createGridLines() {
+            // Create horizontal lines with varying spacing
+            for(let y = 0; y < window.innerHeight; y += gridSize) {
+                const line = document.createElement('div');
+                line.className = 'grid-line horizontal-line';
+                line.style.top = y + 'px';
+                line.style.animation = `gridPulse ${3 + Math.random() * 2}s infinite`;
+                document.body.appendChild(line);
+            }
+
+            // Create vertical lines with varying spacing
+            for(let x = 0; x < window.innerWidth; x += gridSize) {
+                const line = document.createElement('div');
+                line.className = 'grid-line vertical-line';
+                line.style.left = x + 'px';
+                line.style.animation = `gridPulse ${3 + Math.random() * 2}s infinite`;
+                document.body.appendChild(line);
+            }
+        }
+
+        function updateGridOpacity() {
+            gridOpacity = gridFading ? Math.max(0.05, gridOpacity - 0.001) : Math.min(0.15, gridOpacity + 0.001);
+            if(gridOpacity <= 0.05 || gridOpacity >= 0.15) gridFading = !gridFading;
+            
+            document.querySelectorAll('.grid-line').forEach(line => {
+                line.style.opacity = gridOpacity;
+                // Add subtle movement to grid lines
+                const moveAmount = Math.sin(Date.now() / 2000) * 2;
+                if (line.classList.contains('horizontal-line')) {
+                    line.style.transform = `translateY(${moveAmount}px)`;
+                } else {
+                    line.style.transform = `translateX(${moveAmount}px)`;
+                }
+            });
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "rgba(0, 255, 0, 0.15)";
+            ctx.font = fontSize + "px monospace";
+
+            for(let i = 0; i < drops.length; i++) {
+                // Add variation to character appearance
+                if (Math.random() > 0.985) {
+                    const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                    const opacity = 0.1 + Math.random() * 0.1;
+                    ctx.fillStyle = `rgba(0, 255, 0, ${opacity})`;
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                }
+
+                // Add occasional brighter characters
+                if (Math.random() > 0.995) {
+                    const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                    ctx.fillStyle = "rgba(0, 255, 0, 0.3)";
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                }
+
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.985) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+
+            // Update grid opacity and add subtle movement
+            updateGridOpacity();
+        }
+
+        // Initialize background effects
+        function initBackground() {
+            createGridLines();
+            createParticles();
+            createMatrixChars();
+            createWavePattern();
+            createGlitchOverlay();
+            createLightBeams();
+            createScanLine();
+            createPulseDots();
+            setInterval(drawMatrix, 50);
+            requestAnimationFrame(updateBackground);
+
+            // Track mouse movement
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Enhanced pulse effect on game completion
+            document.addEventListener('gameComplete', () => {
+                // Matrix effect
+                ctx.fillStyle = "rgba(0, 255, 0, 0.3)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Grid effect
+                document.querySelectorAll('.grid-line').forEach(line => {
+                    line.style.opacity = 0.3;
+                    line.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        line.style.opacity = gridOpacity;
+                        line.style.transform = 'scale(1)';
+                    }, 500);
+                });
+
+                // Particle burst effect
+                createParticleBurst(mouseX, mouseY);
+                triggerGlitchEffect();
+                
+                // Pulse dot effect
+                pulseDots.forEach(dot => {
+                    dot.style.animation = 'none';
+                    dot.offsetHeight; // Trigger reflow
+                    dot.style.animation = 'pulse 2s infinite';
+                });
+            });
+        }
+
+        function createWavePattern() {
+            wavePattern = document.createElement('div');
+            wavePattern.className = 'wave-pattern';
+            document.body.appendChild(wavePattern);
+        }
+
+        function createGlitchOverlay() {
+            glitchOverlay = document.createElement('div');
+            glitchOverlay.className = 'glitch-overlay';
+            document.body.appendChild(glitchOverlay);
+        }
+
+        function createLightBeams() {
+            for (let i = 0; i < 5; i++) {
+                const beam = document.createElement('div');
+                beam.className = 'light-beam';
+                beam.style.left = Math.random() * window.innerWidth + 'px';
+                beam.style.top = Math.random() * window.innerHeight + 'px';
+                beam.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(beam);
+                lightBeams.push({
+                    element: beam,
+                    angle: Math.random() * 360,
+                    speed: 0.1 + Math.random() * 0.2
+                });
+            }
+        }
+
+        function triggerGlitchEffect() {
+            glitchOverlay.style.opacity = 0.3;
+            setTimeout(() => {
+                glitchOverlay.style.opacity = 0;
+            }, 200);
+        }
+
+        // Create particles
+        function createParticles() {
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 5 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(particle);
+                particles.push({
+                    element: particle,
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    size: size
+                });
+            }
+        }
+
+        // Create matrix characters
+        function createMatrixChars() {
+            for (let i = 0; i < 100; i++) {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = Math.random() > 0.5 ? '0' : '1';
+                char.style.left = Math.random() * window.innerWidth + 'px';
+                char.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(char);
+                matrixCharElements.push({
+                    element: char,
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    opacity: Math.random() * 0.5,
+                    speed: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+
+        // Create particle burst effect
+        function createParticleBurst(x, y) {
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 3 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                document.body.appendChild(particle);
+                
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 2 + 1;
+                const vx = Math.cos(angle) * speed;
+                const vy = Math.sin(angle) * speed;
+                
+                particles.push({
+                    element: particle,
+                    x: x,
+                    y: y,
+                    vx: vx,
+                    vy: vy,
+                    size: size,
+                    life: 1
+                });
+            }
+        }
+
+        // Update background animation
+        function updateBackground(timestamp) {
+            const deltaTime = timestamp - lastTime;
+            lastTime = timestamp;
+
+            // Update particles
+            particles.forEach((particle, index) => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                
+                // Bounce off walls
+                if (particle.x < 0 || particle.x > window.innerWidth) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > window.innerHeight) particle.vy *= -1;
+                
+                // Apply mouse attraction with increased strength
+                const dx = mouseX - particle.x;
+                const dy = mouseY - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 300) { // Increased from 200 to 300
+                    const force = 0.0005; // Increased from 0.0001
+                    particle.vx += dx * force;
+                    particle.vy += dy * force;
+                    
+                    // Add repulsion when too close
+                    if (distance < 50) {
+                        particle.vx -= dx * force * 2;
+                        particle.vy -= dy * force * 2;
+                    }
+                }
+                
+                // Update element position
+                particle.element.style.left = particle.x + 'px';
+                particle.element.style.top = particle.y + 'px';
+                
+                // Fade out and remove dead particles
+                if (particle.life !== undefined) {
+                    particle.life -= 0.01;
+                    particle.element.style.opacity = particle.life;
+                    if (particle.life <= 0) {
+                        particle.element.remove();
+                        particles.splice(index, 1);
+                    }
+                }
+            });
+
+            // Update matrix characters
+            matrixCharElements.forEach(char => {
+                char.y += char.speed;
+                if (char.y > window.innerHeight) {
+                    char.y = 0;
+                    char.x = Math.random() * window.innerWidth;
+                }
+                char.element.style.left = char.x + 'px';
+                char.element.style.top = char.y + 'px';
+                char.opacity = Math.sin(Date.now() * 0.001 + char.x * 0.01) * 0.2 + 0.3;
+                char.element.style.opacity = char.opacity;
+            });
+
+            // Update light beams
+            lightBeams.forEach(beam => {
+                beam.angle += beam.speed;
+                beam.element.style.transform = `rotate(${beam.angle}deg)`;
+                beam.element.style.opacity = Math.sin(Date.now() * 0.001 + beam.angle) * 0.1 + 0.1;
+            });
+
+            // Update pulse dots
+            updatePulseDots();
+
+            // Random glitch effect
+            if (Math.random() > 0.995) {
+                triggerGlitchEffect();
+            }
+
+            // Create connections between nearby particles
+            updateConnections();
+
+            requestAnimationFrame(updateBackground);
+        }
+
+        // Update particle connections
+        function updateConnections() {
+            // Remove old connections
+            connections.forEach(connection => connection.element.remove());
+            connections = [];
+
+            // Create new connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p1 = particles[i];
+                    const p2 = particles[j];
+                    const dx = p2.x - p1.x;
+                    const dy = p2.y - p1.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        const connection = document.createElement('div');
+                        connection.className = 'connection-line';
+                        connection.style.left = p1.x + 'px';
+                        connection.style.top = p1.y + 'px';
+                        connection.style.width = distance + 'px';
+                        connection.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+                        connection.style.opacity = (1 - distance / 150) * 0.2;
+                        document.body.appendChild(connection);
+                        connections.push({ element: connection });
+                    }
+                }
+            }
+        }
+
+        // Update window resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Remove existing elements
+            document.querySelectorAll('.grid-line, .particle, .connection-line, .matrix-char, .light-beam, .pulse-dot')
+                .forEach(el => el.remove());
+            
+            // Recreate background elements
+            createGridLines();
+            createParticles();
+            createMatrixChars();
+            createLightBeams();
+            createPulseDots();
+        });
+
+        // Glitch Text Effect
+        function applyGlitchEffect(element) {
+            const text = element.textContent;
+            element.setAttribute('data-text', text);
+            element.classList.add('glitch-text');
+        }
+
+        // Success Notification
+        function showSuccessNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'success-notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('fade-in'), 100);
+            setTimeout(() => {
+                notification.classList.remove('fade-in');
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        // Update game success handlers
+        function handleGameSuccess(gameName) {
+            score++;
+            gameIndex++;
+            showSuccessNotification(`${gameName} Completed!`);
+            
+            // Trigger grid pulse effect
+            document.dispatchEvent(new Event('gameComplete'));
+            
+            // Show story message with longer duration for important messages
+            const gameType = games[gameIndex - 1];
+            const stories = gameStories[gameType];
+            if (stories) {
+                const storyMessage = stories[Math.floor(Math.random() * stories.length)];
+                const isImportantMessage = storyMessage.includes("WARNING") || 
+                                         storyMessage.includes("CRITICAL") ||
+                                         storyMessage.includes("SYSTEM");
+                showStoryPopup(storyMessage, isImportantMessage ? 12000 : 8000);
+            }
+            
+            updateNeuralStatus(gameIndex, false);
+            
+            if (gameIndex < games.length) {
+                const nextGame = document.querySelector(`#${games[gameIndex]} h3`);
+                applyGlitchEffect(nextGame);
+            }
+            
+            setTimeout(() => startNextGame(), 1000);
+        }
+
+        // Update story popup function
+        function showStoryPopup(message, duration = 8000) {
+            const popup = document.getElementById('story-popup');
+            
+            // Clear any existing timeout
+            if (popup.timeoutId) {
+                clearTimeout(popup.timeoutId);
+                popup.classList.remove('show');
+            }
+            
+            // Set new message and show
+            popup.textContent = message;
+            
+            // Small delay before showing to ensure animation plays
+            setTimeout(() => {
+                popup.classList.add('show');
+            }, 100);
+            
+            // Store the timeout ID
+            popup.timeoutId = setTimeout(() => {
+                popup.classList.remove('show');
+            }, duration);
+        }
+
+        // Update neural status
+        function updateNeuralStatus(gameProgress, isSkip = false) {
+            const coherence = document.getElementById('coherence');
+            const integrity = document.getElementById('integrity');
+            const sync = document.getElementById('sync');
+            const alert = document.getElementById('status-alert');
+
+            const progress = (gameProgress / games.length) * 100;
+            const skipPenalty = isSkip ? 10 : 0; // Additional penalty for skipping
+            const coherenceValue = Math.max(87 - progress - skipPenalty, 20);
+            const integrityValue = Math.max(92 - progress * 1.5 - skipPenalty, 15);
+            const syncValue = Math.max(95 - progress * 2 - skipPenalty, 10);
+
+            coherence.textContent = Math.round(coherenceValue) + '%';
+            integrity.textContent = Math.round(integrityValue) + '%';
+            sync.textContent = Math.round(syncValue) + '%';
+
+            if (progress > 50 || isSkip) {
+                alert.textContent = "WARNING: SYSTEM DESTABILIZING";
+            }
+        }
+
+        // Add skip game function
+        function skipGame(gameId) {
+            if (confirm("Are you sure you want to skip this challenge? Your score will be reduced.")) {
+                // Clear any existing timer
+                const timerId = gameId.split('-')[0] + '-timer';
+                if (timers[timerId]) {
+                    clearInterval(timers[timerId]);
+                }
+                
+                // Show skip message
+                showStoryPopup("Challenge skipped. Neural coherence compromised...", 5000);
+                
+                // Update neural status with penalty
+                updateNeuralStatus(gameIndex, true);
+                
+                // Move to next game
+                gameIndex++;
+                startNextGame();
+            }
+        }
+
+        function createScanLine() {
+            scanLine = document.createElement('div');
+            scanLine.className = 'scan-line';
+            document.body.appendChild(scanLine);
+        }
+
+        function createPulseDots() {
+            for (let i = 0; i < 10; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'pulse-dot';
+                dot.textContent = Math.floor(Math.random() * 10); // Random number 0-9
+                dot.style.left = Math.random() * window.innerWidth + 'px';
+                dot.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(dot);
+                pulseDots.push({
+                    element: dot,
+                    number: parseInt(dot.textContent)
+                });
+            }
+        }
+
+        function updatePulseDots() {
+            pulseDots.forEach(dot => {
+                if (Math.random() > 0.99) {
+                    dot.element.style.left = Math.random() * window.innerWidth + 'px';
+                    dot.element.style.top = Math.random() * window.innerHeight + 'px';
+                    // Occasionally change the number
+                    if (Math.random() > 0.95) {
+                        const newNumber = Math.floor(Math.random() * 10);
+                        dot.element.textContent = newNumber;
+                        dot.number = newNumber;
+                    }
                 }
             });
         }
