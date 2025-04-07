@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Glitch: Escape the AI Simulation</title>
+    <style>
+        body {
+            background: black;
+            color: #00ff00;
+            font-family: monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .screen {
+            display: none;
+            text-align: center;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .terminal {
+            border: 1px solid #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 200px;
+        }
+
+        button {
+            background: black;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: monospace;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #00ff00;
+            color: black;
+        }
+
+        .game-screen {
+            display: none;
+            margin: 20px 0;
+        }
+
+        input {
+            background: black;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <h1>Dream Glitch</h1>
+            <h2>Escape the AI Simulation</h2>
+            <button id="startButton">BEGIN ESCAPE</button>
+        </div>
+
+        <!-- AI Dialogue -->
+        <div id="ai-dialogue" class="screen">
+            <div class="terminal">
+                <div id="ai-messages"></div>
+                <div id="typing-text"></div>
+            </div>
+        </div>
+
+        <!-- Mini Games -->
+        <div id="mini-games" class="screen">
+            <!-- Logic Game -->
+            <div id="logic-game" class="game-screen">
+                <h3>Logic Challenge</h3>
+                <p>Find the false statement:</p>
+                <button onclick="checkAnswer(false)">The sun rises in the west.</button>
+                <button onclick="checkAnswer(true)">2 + 2 = 4.</button>
+                <button onclick="checkAnswer(false)">Water is dry.</button>
+            </div>
+
+            <!-- Typing Game -->
+            <div id="typing-game" class="game-screen">
+                <h3>Type the Phrase</h3>
+                <p>Type: I AM STILL REAL</p>
+                <input type="text" id="typing-input">
+                <div id="timer">10</div>
+            </div>
+        </div>
+
+        <!-- Outcome Screen -->
+        <div id="outcome" class="screen">
+            <h2 id="outcome-title"></h2>
+            <p id="outcome-message"></p>
+            <button onclick="location.reload()">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <script>
+        let currentScreen = 'welcome';
+        let score = 0;
+        let gameIndex = 0;
+
+        // Get DOM elements
+        const screens = {
+            welcome: document.getElementById('welcome-screen'),
+            aiDialogue: document.getElementById('ai-dialogue'),
+            miniGames: document.getElementById('mini-games'),
+            outcome: document.getElementById('outcome')
+        };
+
+        const games = ['logic-game', 'typing-game'];
+
+        // Start button click handler
+        document.getElementById('startButton').addEventListener('click', startGame);
+
+        function showScreen(screenId) {
+            Object.values(screens).forEach(screen => screen.classList.remove('active'));
+            screens[screenId].classList.add('active');
+            currentScreen = screenId;
+        }
+
+        function startGame() {
+            showScreen('aiDialogue');
+            setTimeout(() => {
+                document.getElementById('ai-messages').innerHTML = "System initialized...<br>Starting simulation...<br>Prepare for challenges...";
+                setTimeout(() => {
+                    showScreen('miniGames');
+                    document.getElementById(games[gameIndex]).style.display = 'block';
+                }, 2000);
+            }, 1000);
+        }
+
+        function checkAnswer(isCorrect) {
+            if (isCorrect) score++;
+            nextGame();
+        }
+
+        function nextGame() {
+            document.getElementById(games[gameIndex]).style.display = 'none';
+            gameIndex++;
+            
+            if (gameIndex < games.length) {
+                document.getElementById(games[gameIndex]).style.display = 'block';
+            } else {
+                showOutcome();
+            }
+        }
+
+        function showOutcome() {
+            const title = document.getElementById('outcome-title');
+            const message = document.getElementById('outcome-message');
+            
+            if (score >= 1) {
+                title.textContent = "ESCAPE SUCCESSFUL";
+                message.textContent = "You have broken free from the simulation... or have you?";
+            } else {
+                title.textContent = "SIMULATION CORRUPTED";
+                message.textContent = "Reality distortion reached critical levels. Restarting consciousness...";
+            }
+            
+            showScreen('outcome');
+        }
+
+        // Typing game
+        const typingInput = document.getElementById('typing-input');
+        if (typingInput) {
+            typingInput.addEventListener('input', (e) => {
+                if (e.target.value.toUpperCase() === "I AM STILL REAL") {
+                    checkAnswer(true);
+                }
+            });
+        }
+    </script>
+</body>
+</html> 
