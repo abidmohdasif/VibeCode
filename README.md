@@ -1,72 +1,20 @@
-# Dream Glitch: Escape the AI Simulation
-
-A text-based escape game where you must solve puzzles to break free from an AI simulation. Built with vanilla JavaScript, HTML5, and CSS3.
-
-## 🎮 Game Overview
-
-You are trapped in an AI-generated simulation. Your mission is to complete a series of text-based mini-games before the AI corrupts your mind. The world is made of shifting code and logic — no visuals, just pure terminal-style interaction.
-
-## 🎯 Features
-
-- **Terminal-Style Interface**: Green-on-black aesthetic with glitch effects
-- **AI Dialogue System**: Dynamic typing animation with eerie messages
-- **5 Mini-Games**:
-  1. Logic Challenge: Find the false statement
-  2. Keyboard Scramble: Type with remapped keys
-  3. Memory Pattern: Remember and repeat color sequences
-  4. Speed Typing: Race against time
-  5. Glitched Math: Identify the correct equation
-- **Glitch Effects**: CSS-based animations and text distortions
-- **Score Tracking**: Need 3/5 correct answers to escape
-- **Responsive Design**: Works on all devices
-
-## 🚀 Getting Started
-
-1. Clone the repository
-2. Open `index.html` in your web browser
-3. Click "BEGIN ESCAPE" to start
-4. Complete the mini-games to escape the simulation
-
-## 🎨 Technical Details
-
-- Pure HTML/CSS/JavaScript implementation
-- No external libraries or dependencies
-- CSS animations for glitch effects
-- Modular JavaScript with clean state management
-
-## 🎮 Controls
-
-- Click buttons to make selections
-- Type in text inputs when prompted
-- Follow on-screen instructions for each mini-game
-- Watch for the timer in speed-based challenges
-
-## 🛠️ Development
-
-Built with:
-- HTML5
-- CSS3 (with CSS Variables and Animations)
-- Vanilla JavaScript (ES6+)
-- Custom terminal-style UI
-- Monospace fonts for authentic feel
-
-## 🎯 Future Enhancements
-
-- Additional mini-games
-- More complex AI dialogue paths
-- Sound effects and ambient music
-- Achievement system
-- Multiple difficulty levels
-- Save progress feature
-
-## 📝 License
-
-This project is open source and available under the MIT License.
-
-## 🤝 Contributing
-
-Feel free to fork this project and submit pull requests with new features or improvements!
-
----
-
-Created with 🤖 and a bit of glitch ⚡ 
+## What did you build?
+### I built and escape room games where you are stuck in an AI simulation and you have to complete a series
+### of mini games before your mind gets curropted by the AI.
+## What language(s) or tools did you use?
+### This game was built using JavaScript, HTML, and CSS
+## Which AI tools did you use, and how?
+### I used chatgpt and Cursor AI. I used chatgpt to create an outline for the project.
+### I told chatgpt the idea that I had for the project and told to give me an outline for the project.
+### I then copied the outline and put it into cursor ai which helped make the idea come to life.
+### Obviously it didn't come out like I wanted it to so I had to do a little bit of cleaning up.
+## What did you do versus what AI helped with?
+### AI helped me build the skeleton and I just had to fix some errors and change it the way I wanted it to look.
+### Sometimes AI doesnt do what you tell it to, so you have to manually go in there read the code and fix it based on how you want it to look.
+## What’s one thing you’re proud of?
+### One thing that I am proud of is how the website/game looks. It took a while but I got the whole website to look like a HACK theme.
+### There was also cool little mini games although some of them are a little annoying. But I like the idea behind it.
+## What’s one thing you’d improve with more time?
+### If I had a little bit more time I would most likely fix the background, There are these random number that show up(that I like) however there
+### is also and circle that shoes up with the numbers. I belive it would look cooler without the circle. The background in of it self needs some love.
+### I also couldnt get the progress bar to work so maybe fix that up as well.
